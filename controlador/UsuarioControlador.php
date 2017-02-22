@@ -1,5 +1,6 @@
 <?php
-$ruta = '/home/dmontes/Documents/CSC/inter0616/DesarrolloWebPHP/D11';
+//$ruta = '/home/dmontes/Documents/CSC/inter0616/DesarrolloWebPHP/D11';
+$ruta = $_SERVER['DOCUMENT_ROOT'];
 require_once($ruta.'/modelo/UsuarioModelo.php');
 require_once($ruta.'/modelo/LibroModelo.php');
 require_once($ruta.'/controlador/PrestamoControlador.php');

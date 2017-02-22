@@ -15,13 +15,22 @@ if (AMBIENTE === 'DESARROLLO') {
 	define('DEBUG_SQL', true);	
 	define('ASSOC', true);	
 	define('ALL', false);	
-    define('DB_HOST', '127.0.0.1');
+        define('DB_HOST', 'localhost');
 	define('DB_PORT', '5432');
-    define('DB_NAME', 'biblioteca');
-	define('DB_USER', 'personal');
-    define('DB_PASSWORD', 'kndaXBNU');
+        define('DB_NAME', 'tienda');
+	define('DB_USER', 'tienda');
+        define('DB_PASSWORD', 'hola123,');
 
 } elseif (AMBIENTE === 'PRODUCCIÓN') {
+	define('DB', 'pgsql');	
+	define('DEBUG_SQL', false);	
+	define('ASSOC', true);	
+	define('ALL', false);	
+        define('DB_HOST', 'localhost');
+	define('DB_PORT', '5432');
+        define('DB_NAME', 'tienda');
+	define('DB_USER', 'tienda');
+        define('DB_PASSWORD', 'hola123,');
 
 } else {
 	die();
