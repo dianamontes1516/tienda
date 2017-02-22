@@ -1,6 +1,6 @@
 function validUser(valor){
     $.ajax({
-        url: 'usuarioValido', // Biblio/usuarioValido
+        url: 'usuarioValido', // Tienda/usuarioValido
         method: 'POST',
         dataType: 'json',
         data: {username:valor},

@@ -1,5 +1,4 @@
 <?php
-//$ruta = '/home/dmontes/Documents/CSC/inter0616/DesarrolloWebPHP/D11';
 $ruta = $_SERVER['DOCUMENT_ROOT'];
 require_once($ruta.'/modelo/ProductoModelo.php');
 

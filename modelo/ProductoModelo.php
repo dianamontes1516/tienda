@@ -5,38 +5,21 @@ class ProductoModelo extends Modelo
 {
 
     public function __construct(){
-        parent::__construct('descripcion_productos');
+        parent::__construct('inventario');
     }
 
     /* Hace una consulta para devolver todos los producto 
      * que hay y disponiblidad
      */
     public function todos(){
-        $query = "select d.id
-                         , d.name
-                         , d.description
-                         , d.price
-                         , existencia.total
-                  from (
-                          select count(d.id) as total
-                                , d.id
-                          from products as p
-                                , descripcion_producto as d
-                                , venta_producto as v
-                          where p.producto = d.id
-                                 and p.id != v.id_product
-                          group by(d.id)
-                         ) as existencia
-                  join descripcion_producto as d
-                  on d.id = existencia.id";
-        return $this->query($query, ALL);
+        return $this->all();
     }
 
     /* Dado el código  de un  producto quiero
      * saber cuantas existencias hay
      */
-    public function existencia($code){
-
+    public function existencia($id){
+        return $this->base->select('inventario',$id);        
     }
 
     /* Da de alta un producto nuevo

@@ -33,6 +33,7 @@ class DB
      */ 
     public function query($query,$assoc){
         $resultado = $this->con->query($query);
+        error_log($query);
         if($resultado === false){ //error
             return false;
         }else{

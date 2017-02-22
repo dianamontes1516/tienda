@@ -10,53 +10,61 @@ class Usuario
     private $correo;
     private $rol;
 
-    public function __constructor(string $id){
-        $this->username = $id;
+    public function __constructor($datos){
+        print_r($datos);
+        echo "ctpm";
+        $this->username = $datos['usern'];
+        $this->nombre = $datos['nombre'];
+        $this->aPaterno = $datos['apat'];
+        $this->aMaterno = $datos['amat'];
+        $this->password = $datos['pass'];
+        $this->correo = $datos['mail'];
+        $this->role = $datos['rol'];
     }
     
     /* Métodos SET */
     /* Métodos GET */
 
-    public function getNombre():string{
+    public function getNombre(){
         return $this->nombre;
     }
 
-    public function getAPaterno():string{
+    public function getAPaterno(){
         return $this->aPaterno;
     }
     
-    public function getAMaterno():string{
+    public function getAMaterno(){
         return $this->aMaterno;
     }
     
-    public function getNombreCompleto():string{
+    public function getNombreCompleto(){
         $n = $this->nombre;
         $n .= ' '.$this->aPaterno;
         $n .= ' '.$this->aMaterno;
         return $n;
     }
     
-    public function getUsername():string{
+    public function getUsername(){
         return $this->username;
     }
 
-    public function getPassword():string{
+    public function getPassword(){
         return $this->password;
     }
 
-    public function getRol():int{
+    public function getRol(){
         return $this->rol;
     }
 
-    public function getCorreo():int{
+    public function getCorreo(){
         return $this->correo;
     }
 
-    public function setCorreo(int $c){
+    public function setCorreo($c){
         $this->correo = $c;
     }
     
-    public function setRol(int $rol){
+    public function setRol($rol){
         $this->rol = $rol;
     }
     

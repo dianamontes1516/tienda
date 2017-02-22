@@ -52,7 +52,7 @@
       
       ¿Ya tienes cuenta de usuario o administraror?
       <br>
-      <a href='/Tienda/login'> Ingresa al sistema </a>
+      <a href='/Tienda/consultor/login'> Ingresa al sistema </a>
 
   </body>
 </html>

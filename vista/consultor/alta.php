@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Alta</title>
-
-    <!-- Javascript -->
-    <script type="text/javascript" src="/vista/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/vista/js/jquery.validate.js"></script>
-    <script type="text/javascript" src="/vista/js/util.validator.js"></script>
-    <script type="text/javascript" src="/vista/js/alta.js"></script>
+    <title>Alta Usuario</title>
    
   </head>
   <body>
       <p> Ingresa los siguientes datos para darte de alta como usuario</p>
-    <!-- El submit manejado en alta.js -->
-    <form id="alta" >      
+
+      
+      <form id="alta" action="/Tienda/controlador/consultor/alta"
+            method="post">      
       <div >
         <label>Nombre:</label>
         <input type="text" name="nombre" id="nombre" > 
@@ -34,19 +30,24 @@
         <input type="text" name="usern" id="usern" value=''> 
       </div>
       
+      <div >
+        <label>Correo:</label>
+        <input type="text" name="mail" id="mail" > 
+      </div>
+      
       <div>
         <label for="pass" >Contraseña:</label>
-        <input type="password" id="pass1" name="pass1">
+        <input type="password" id="pass1" name="pass">
       </div>
       
       <div>
         <label for="pass">Repite contraseña:</label>
-        <input type="password" id="pass2" name="pass2" >
+        <input type="password" id="pass2" name="passC" >
       </div>
 
       <div>
-          <button id="Cancel">  <a href='/Biblio'> Cancelar</a>    </button>
-          <button id="Acceder">  Alta     </button>
+          <button id="Cancel">  <a href='/Tienda'> Cancelar</a>    </button>
+          <button id="Acceder" type="submit">  Alta  </button>
       </div>
     </form>
   </body>
