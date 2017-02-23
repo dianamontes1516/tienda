@@ -1,7 +1,7 @@
 <?php
 $c = new ProductoControlador();
 $items = $c->catalogo();
-print_r($items);
+//print_r($items);
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +11,10 @@ print_r($items);
    
   </head>
   <body>
-
-    
-
+    <?php
+        $ruta = $_SERVER['DOCUMENT_ROOT'];
+        require_once($ruta.'/vista/menu.php');
+    ?>
       <h2>Estos son los productos que te ofrece la tienda X:</h2>
       <table>
           <tr>
@@ -41,5 +42,7 @@ print_r($items);
               </form>
           <?php endforeach; ?>
       </table>
+
+      
   </body>
 </html>

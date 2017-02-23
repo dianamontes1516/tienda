@@ -1,2 +1,4 @@
 <?php
-echo "Se muestra la factura de la compra.";
+    $ruta = $_SERVER['DOCUMENT_ROOT'];
+    require_once($ruta.'/vista/menu.php');
+?>

@@ -6,9 +6,15 @@
 			<li><a href="/Tienda/consultor/catalogo">Catalogo</a></li>
 			<li><a href="/Tienda/consultor/alta">Nuevo Usuario</a></li>
 			<li><a href="/Tienda/usuario/carrito">Consultar Carrito</a></li>
-			<li><a href="/Tienda/usuario/carrito">Comprar lo del Carrito</a></li>
-			<li><a href="/Tienda/usuario/agrega">Agregar Productos al Carrito</a></li>
-			<li><a href="/Tienda/consultor/login">Login</a></li>
+			<li><a href="/Tienda/usuario/comprar">Comprar lo del Carrito</a></li>
+			<li><a href="/Tienda/usuario/agregar">Agregar Productos al Carrito</a></li>
+			<?php
+				if(isset($_SESSION['username_u'])){
+                    echo '<li><a href="/Tienda/exit">Cerrar Sesión</a></li>';
+                }else{
+                    echo '<li><a href="/Tienda/consultor/login">Login</a></li>';
+                }
+            ?>
 		</ul>
 	</nav>
 

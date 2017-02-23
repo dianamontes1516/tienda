@@ -10,6 +10,10 @@ $items = $c->catalogo();
    
   </head>
   <body>
+    <?php
+        $ruta = $_SERVER['DOCUMENT_ROOT'];
+        require_once($ruta.'/vista/menu.php');
+    ?>
       <h2>Estos son los productos que te ofrece la tienda X:</h2>
       <table>
           <tr>

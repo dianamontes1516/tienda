@@ -5,6 +5,10 @@
 
   </head>
   <body>
+    <?php
+        $ruta = $_SERVER['DOCUMENT_ROOT'];
+        require_once($ruta.'/vista/menu.php');
+    ?>
     <div><h3>Login</h3></div>
     <!-- El submit manejado en form.js -->
     <form id="login" action="/Tienda/controlador/consultor/login"

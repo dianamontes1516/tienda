@@ -68,11 +68,11 @@ class UsuarioControlador
             session_start();
             $_SESSION['username_u']=$info->username;
             $_SESSION['nombre_u']=$info->name;
+            $_SESSION['rol']=$info->rol == 'true'? 'admin' : 'usuario';
             return true;
         }
         echo "No ha podido ser autenticado";
-        return false;
-        
+        return false;        
     }
 
     public function info($id){
@@ -102,10 +102,11 @@ class UsuarioControlador
         }
         
         $usuario = $this->usuarioM->find($username,'username');
-        if(isset($info->username) === false){
+        print_r($usuario);
+        if($usuario->username === false){
             echo "Usuario no encontrado";
             return false;
         }
-        return $this->usuarioM->agregaACarrito($id_u,$id_p);
+        return $this->usuarioM->agregaACarrito($usuario->id,$id_p);
     }
 }

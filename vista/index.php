@@ -13,9 +13,7 @@
   <body>
 
     <?php
-        //echo "1";
         $ruta = $_SERVER['DOCUMENT_ROOT'];
-        //exit("fin");
         require_once($ruta.'/vista/menu.php');
     ?>
 
@@ -52,7 +50,7 @@
               </a>
           </li>
           <li>
-              <a href='/Tienda/usuario/agrega'>
+              <a href='/Tienda/usuario/agregar'>
                   Agregar productos a tu carrito
               </a>
           </li>

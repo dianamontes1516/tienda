@@ -2,9 +2,12 @@
 <html>
   <head>
     <title>Alta Usuario</title>
-   
   </head>
   <body>
+    <?php
+        $ruta = $_SERVER['DOCUMENT_ROOT'];
+        require_once($ruta.'/vista/menu.php');
+    ?>
       <p> Ingresa los siguientes datos para darte de alta como usuario</p>
       <div><h3>Nuevo Usuario</h3></div>
       <form id="alta" action="/Tienda/controlador/consultor/alta"

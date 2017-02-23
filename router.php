@@ -6,8 +6,6 @@ session_name('Tienda');
 session_start();
 return routeRequest();
 
-//$uri == '/Biblio/usuarioValido'
-
 function routeRequest()
 {
     $uri = $_SERVER['REQUEST_URI'];
@@ -19,16 +17,18 @@ function routeRequest()
         $valores = explode('/',$uri);
         switch($valores[3]){
             case 'catalogo':
-                require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/catalogo.php');        
+                require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/catalogo.php');
                 break;
             case 'alta':
-                echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
+                //echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');
+                require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');
                 break;
             case 'login':
-                if(isset($_SESSION['id_u'])){
+                if(isset($_SESSION['username_u'])){
                     echo 'Ya estás in';
                 }else{
-                    echo file_get_contents('./vista/login.php');
+                    //echo file_get_contents('./vista/login.php');
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/login.php');
                 }        
                 break;
             default:  
@@ -36,18 +36,19 @@ function routeRequest()
                 break;
         }        
     } elseif (preg_match("/Tienda\/usuario\/[\s\S]+$/", $uri)){
-        if(isset($_SESSION['username_u'])){
+        if(isset($_SESSION['username_u']) and $_SESSION['rol'] == 'usuario'){
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
-                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/index.php');        
-                    
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/index.php');
                     break;
                 case 'carrito':
-                    echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/carrito.php');
+                    //echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/carrito.php');
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/carrito.php');
                     break;
                 case 'comprar':
-                    echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/compra.php');
+                    //echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/compra.php');
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/compra.php');
                     break;
                 case 'agregar':
                     require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/agregar.php');
@@ -57,16 +58,14 @@ function routeRequest()
                     break;
             }
         }else{
-            header("Location:/Tienda/login");
+            require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/nosesion.php");
         }        
     } elseif (preg_match("/Tienda\/admin\/[\s\S]+$/", $uri)){
-        if(isset($_SESSION['id_u'])){
+        if(isset($_SESSION['username_u']) and $_SESSION['rol'] == 'admin'){
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
                     echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/admin/index.php');        
-                    break;
-                case 'altaAdmin':
                     break;
                 case 'altaProducto':
                     break;
@@ -77,54 +76,52 @@ function routeRequest()
                     break;
             }
         }else{
-            header("Location:/Tienda/login");
+            require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/nosesion.php");
         }        
     } elseif (preg_match("/Tienda\/exit/", $uri)){
-        echo "Hasta luego ".$_SESSION['id_u'];
+        echo "Hasta luego ".$_SESSION['username_u'];
 	session_unset();
 	session_destroy();
-        
+        header("Location:/Tienda");
     } elseif (preg_match("/Tienda\/controlador\/consultor\/[\s\S]+$/", $uri)){
-            $valores = explode('/',$uri);        
-            switch($valores[4]){
-                case 'login':
-                    $u = new UsuarioControlador();                
-                    $resp = $u->login($_POST['usern'],$_POST['pass']);
-                    if($resp){ //ejemplo simple, sólo un usuario logeado
-                         header("Location:/Tienda/usuario/inicio");
-                    }else{
-                        echo file_get_contents('./vista/login.php');
-                    }
-                    break;
-                case 'alta':
-                    $u = new UsuarioControlador();                
-                    
-                    $resp = $u->alta($_POST);
-                    
-                    if($resp){ //ejemplo simple, sólo un usuario logeado
-                        $_SESSION['id_u']=$_POST['usern'];
-                        $_SESSION['nombre_u']=$_POST['nombre'];
-                        header("Location:/Tienda/usuario/inicio");
-                    }else{
-                        require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
-
-                    }
-                    break;
-                default:  
-                    header("Location:/Tienda");
-                    break;
-            }
-    } elseif (preg_match("/Tienda\/controlador\/usuario\/[\s\S]+$/", $uri)){
         $valores = explode('/',$uri);        
-        if(isset($_SESSION['id_u'])){
+        switch($valores[4]){
+            case 'login':
+                $u = new UsuarioControlador();                
+                $resp = $u->login($_POST['usern'],$_POST['pass']);
+                if($resp){ //ejemplo simple, sólo un usuario logeado
+                    header("Location:/Tienda/usuario/inicio");
+                }else{
+                    echo file_get_contents('./vista/login.php');
+                }
+                break;
+            case 'alta':
+                $u = new UsuarioControlador();                
+                
+                $resp = $u->alta($_POST);
+                if($resp){ //ejemplo simple, sólo un usuario logeado
+                    $_SESSION['usuario_u']=$_POST['usern'];
+                    $_SESSION['nombre_u']=$_POST['nombre'];
+                    $_SESSION['rol']=$info->rol == 'true'? 'admin' : 'usuario';
+                    header("Location:/Tienda/usuario/inicio");
+                }else{
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
+                }
+                break;
+            default:  
+                header("Location:/Tienda");
+                break;
+        }
+    } elseif (preg_match("/Tienda\/controlador\/usuario\/[\s\S]+$/", $uri)){
+        $valores = explode('/',$uri);
+        if(isset($_SESSION['username_u'])){
             switch($valores[4]){
                 case 'login':
                     break;
                 case 'agrega':
                     $u = new UsuarioControlador();
-                    print_r($_POST);
-                    print_r($_SESSION['id_u']);
-                    $u->agregarACarrito($_SESSION['id_u'],$_POST['producto']);
+                    $u->agregarACarrito($_SESSION['username_u'],$_POST['producto']);
+                    
                     break;
                 default:  
                     header("Location:/Tienda");
@@ -133,8 +130,9 @@ function routeRequest()
         }
     } elseif (preg_match("/\/vista\/js\/[\s\S]*.js/", $uri)){
         echo file_get_contents($_SERVER['DOCUMENT_ROOT'].$uri);        
-    }else {
-        echo "404 Lo sentimos no podemos atender tu peticion:\n".$uri;
-    }
+    }else { 
+        require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/notfound.php");
+
+   }
 }
 

@@ -45,13 +45,15 @@ class UsuarioModelo extends Modelo
      */
     public function agregaACarrito($id_user, $id_prod){
         $query1 = "select id 
-                   from product 
-                   where prodcuto=$id_prod limi1";
-        echo $query1;
+                   from products 
+                   where producto=$id_prod and id not 
+                     in (select id_product from carrito 
+                       where id_user = $id_user) limit 1";
+
         $prod = $this->query($query1, ASSOC)['id'];
-        $query2 = "insert into carrito(prod, id_user) 
-                  values ($id_prod, $id_user)";
-        echo $query2;
+        $query2 = "insert into carrito(id_product, id_user) 
+                  values ($prod, $id_user)";
+
         return $this->query($query2, ALL);
     }
 
@@ -64,7 +66,6 @@ class UsuarioModelo extends Modelo
                   and id_product = $id_prod;";
         return $this->query($query, ALL);
     }
-
 
     /* Vacía el carrito un usuario
      */
@@ -82,6 +83,10 @@ class UsuarioModelo extends Modelo
                      select $venta, id_product from carrito";
         $this->query($query2, ALL);
         $this->VacíaCarrito($id_user);
+        //borramos el articulo de los carritos de los demás
+        $query = "delete from carrito where id_product in 
+                  (select id_product from venta_producto where id_venta = $venta)";
+        return $this->query($query, ALL);
     }
 
     /* Muestra factura de última compra
