@@ -19,12 +19,14 @@ class ProductoModelo extends Modelo
      * saber cuantas existencias hay
      */
     public function existencia($id){
-        return $this->base->select('inventario',$id);        
+        return $this->query(
+            "select total from inventario where id = $id",ASSOC
+        )['total'];        
     }
 
     /* Da de alta un producto nuevo
      */
-    public function alta($u):bool{
+    public function alta($u){
         $datos = ['username' => $u->username
                  ,'nombre' => $u->nombre
                  ,'apellidop' => $u->aPaterno

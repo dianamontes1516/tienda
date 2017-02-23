@@ -1,0 +1,13 @@
+HTTP/1.1 303 See Other
+Date: Wed, 22 Feb 2017 23:33:22 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Location: https://aula.cert.unam.mx/login/index.php
+Content-Language: en
+Set-Cookie: MoodleSession=igq25carhg0la0i2obmg593ru7; path=/; HttpOnly
+Content-Length: 439
+Content-Type: text/html; charset=utf-8
+

@@ -44,9 +44,15 @@ class UsuarioModelo extends Modelo
      * de un usuario 
      */
     public function agregaACarrito($id_user, $id_prod){
-        $query = "insert into carrito(id_product, id_user) 
+        $query1 = "select id 
+                   from product 
+                   where prodcuto=$id_prod limi1";
+        echo $query1;
+        $prod = $this->query($query1, ASSOC)['id'];
+        $query2 = "insert into carrito(prod, id_user) 
                   values ($id_prod, $id_user)";
-        return $this->query($query, ALL);
+        echo $query2;
+        return $this->query($query2, ALL);
     }
 
     /* Borra un producto en el carrito
