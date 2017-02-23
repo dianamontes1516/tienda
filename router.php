@@ -6,8 +6,6 @@ session_name('Tienda');
 session_start();
 return routeRequest();
 
-//$uri == '/Biblio/usuarioValido'
-
 function routeRequest()
 {
     $uri = $_SERVER['REQUEST_URI'];
@@ -56,7 +54,7 @@ function routeRequest()
                     break;
             }
         }else{
-            header("Location:/Tienda/login");
+            header("Location:/Tienda/error/login");
         }        
     } elseif (preg_match("/Tienda\/admin\/[\s\S]+$/", $uri)){
         if(isset($_SESSION['username_u'])){
