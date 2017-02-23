@@ -71,8 +71,7 @@ class UsuarioControlador
             return true;
         }
         echo "No ha podido ser autenticado";
-        return false;
-        
+        return false;        
     }
 
     public function info($id){

@@ -25,7 +25,7 @@ function routeRequest()
                 echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
                 break;
             case 'login':
-                if(isset($_SESSION['id_u'])){
+                if(isset($_SESSION['username_u'])){
                     echo 'Ya estás in';
                 }else{
                     echo file_get_contents('./vista/login.php');
@@ -60,7 +60,7 @@ function routeRequest()
             header("Location:/Tienda/login");
         }        
     } elseif (preg_match("/Tienda\/admin\/[\s\S]+$/", $uri)){
-        if(isset($_SESSION['id_u'])){
+        if(isset($_SESSION['username_u'])){
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
@@ -80,50 +80,49 @@ function routeRequest()
             header("Location:/Tienda/login");
         }        
     } elseif (preg_match("/Tienda\/exit/", $uri)){
-        echo "Hasta luego ".$_SESSION['id_u'];
+        echo "Hasta luego ".$_SESSION['username_u'];
 	session_unset();
 	session_destroy();
         
     } elseif (preg_match("/Tienda\/controlador\/consultor\/[\s\S]+$/", $uri)){
-            $valores = explode('/',$uri);        
-            switch($valores[4]){
-                case 'login':
-                    $u = new UsuarioControlador();                
-                    $resp = $u->login($_POST['usern'],$_POST['pass']);
-                    if($resp){ //ejemplo simple, sólo un usuario logeado
-                         header("Location:/Tienda/usuario/inicio");
-                    }else{
-                        echo file_get_contents('./vista/login.php');
-                    }
-                    break;
-                case 'alta':
-                    $u = new UsuarioControlador();                
-                    
-                    $resp = $u->alta($_POST);
-                    if($resp){ //ejemplo simple, sólo un usuario logeado
-                        $_SESSION['id_u']=$_POST['usern'];
-                        $_SESSION['nombre_u']=$_POST['nombre'];
-                        header("Location:/Tienda/usuario/inicio");
-                    }else{
-                        require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
-
-                    }
-                    break;
-                default:  
-                    header("Location:/Tienda");
-                    break;
-            }
+        $valores = explode('/',$uri);        
+        switch($valores[4]){
+            case 'login':
+                $u = new UsuarioControlador();                
+                $resp = $u->login($_POST['usern'],$_POST['pass']);
+                if($resp){ //ejemplo simple, sólo un usuario logeado
+                    header("Location:/Tienda/usuario/inicio");
+                }else{
+                    echo file_get_contents('./vista/login.php');
+                }
+                break;
+            case 'alta':
+                $u = new UsuarioControlador();                
+                
+                $resp = $u->alta($_POST);
+                if($resp){ //ejemplo simple, sólo un usuario logeado
+                    $_SESSION['usuario_u']=$_POST['usern'];
+                    $_SESSION['nombre_u']=$_POST['nombre'];
+                    header("Location:/Tienda/usuario/inicio");
+                }else{
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
+                }
+                break;
+            default:  
+                header("Location:/Tienda");
+                break;
+        }
     } elseif (preg_match("/Tienda\/controlador\/usuario\/[\s\S]+$/", $uri)){
         $valores = explode('/',$uri);        
-        if(isset($_SESSION['id_u'])){
+        if(isset($_SESSION['username_u'])){
             switch($valores[4]){
                 case 'login':
                     break;
                 case 'agrega':
                     $u = new UsuarioControlador();
                     print_r($_POST);
-                    print_r($_SESSION['id_u']);
-                    $u->agregarACarrito($_SESSION['id_u'],$_POST['producto']);
+                    print_r($_SESSION['username_u']);
+                    $u->agregarACarrito($_SESSION['username_u'],$_POST['producto']);
                     break;
                 default:  
                     header("Location:/Tienda");
