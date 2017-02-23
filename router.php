@@ -121,7 +121,7 @@ function routeRequest()
                 case 'agrega':
                     $u = new UsuarioControlador();
                     $u->agregarACarrito($_SESSION['username_u'],$_POST['producto']);
-                    
+                    header('Location:/Tienda/usuario/carrito');
                     break;
                 default:  
                     header("Location:/Tienda");

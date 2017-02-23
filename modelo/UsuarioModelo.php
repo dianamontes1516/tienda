@@ -66,6 +66,15 @@ class UsuarioModelo extends Modelo
                   and id_product = $id_prod;";
         return $this->query($query, ALL);
     }
+    
+    /* Borra un producto en el carrito
+     * de un usuario 
+     */
+    public function muestraCarrito($id_user){
+        $query = "select * from carrito 
+                  where id_user = $id_user;";
+        return $this->query($query, ALL);
+    }
 
     /* Vacía el carrito un usuario
      */

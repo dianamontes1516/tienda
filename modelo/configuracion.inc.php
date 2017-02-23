@@ -17,8 +17,8 @@ if (AMBIENTE === 'DESARROLLO') {
 	define('ALL', false);	
         define('DB_HOST', 'localhost');
 	define('DB_PORT', '5432');
-        define('DB_NAME', 'online_store');
-	define('DB_USER', 'santiago');
+        define('DB_NAME', 'tienda');
+	define('DB_USER', 'tienda');
         define('DB_PASSWORD', 'hola123,');
 
 } elseif (AMBIENTE === 'PRODUCCIÓN') {

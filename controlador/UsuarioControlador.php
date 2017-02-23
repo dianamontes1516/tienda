@@ -81,7 +81,15 @@ class UsuarioControlador
     
      /* Como usuario quiero ver mis cosas del carrito.
      */
-    public function carritoCompras($id_u){
+    public function carritoCompras($username){
+        $validation=Validator::validate(['user'=>$username]                                      
+                                       ,['user' => ['required','alphanumeric']]);
+
+        $info = $this->usuarioM->find($username,'username');
+        if(isset($info->username) === false){
+            return false;
+        }
+        return $this->usuarioM->muestraCarrito($info->id);
     }
 
     /* Como usuario quiero agregar un item a mi carrito
@@ -102,7 +110,7 @@ class UsuarioControlador
         }
         
         $usuario = $this->usuarioM->find($username,'username');
-        print_r($usuario);
+
         if($usuario->username === false){
             echo "Usuario no encontrado";
             return false;
