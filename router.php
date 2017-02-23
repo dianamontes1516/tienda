@@ -34,7 +34,7 @@ function routeRequest()
                 break;
         }        
     } elseif (preg_match("/Tienda\/usuario\/[\s\S]+$/", $uri)){
-        if(isset($_SESSION['username_u'])){
+        if(isset($_SESSION['username_u']) and $_SESSION['rol'] == 'usuario'){
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
@@ -54,10 +54,10 @@ function routeRequest()
                     break;
             }
         }else{
-            header("Location:/Tienda/error/login");
+            require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/nosesion.php");
         }        
     } elseif (preg_match("/Tienda\/admin\/[\s\S]+$/", $uri)){
-        if(isset($_SESSION['username_u'])){
+        if(isset($_SESSION['username_u']) and $_SESSION['rol'] == 'admin'){
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
@@ -72,7 +72,7 @@ function routeRequest()
                     break;
             }
         }else{
-            header("Location:/Tienda/login");
+            require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/nosesion.php");
         }        
     } elseif (preg_match("/Tienda\/exit/", $uri)){
         echo "Hasta luego ".$_SESSION['username_u'];
@@ -98,6 +98,7 @@ function routeRequest()
                 if($resp){ //ejemplo simple, sólo un usuario logeado
                     $_SESSION['usuario_u']=$_POST['usern'];
                     $_SESSION['nombre_u']=$_POST['nombre'];
+                    $_SESSION['rol']=$info->rol == 'true'? 'admin' : 'usuario';
                     header("Location:/Tienda/usuario/inicio");
                 }else{
                     require_once($_SERVER['DOCUMENT_ROOT'].'/vista/consultor/alta.php');        
@@ -125,8 +126,9 @@ function routeRequest()
         }
     } elseif (preg_match("/\/vista\/js\/[\s\S]*.js/", $uri)){
         echo file_get_contents($_SERVER['DOCUMENT_ROOT'].$uri);        
-    }else {
-        echo "404 Lo sentimos no podemos atender tu peticion:\n".$uri;
-    }
+    }else { 
+        require_once($_SERVER['DOCUMENT_ROOT']."/vista/error/notfound.php");
+
+   }
 }
 

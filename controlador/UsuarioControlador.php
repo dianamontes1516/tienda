@@ -68,6 +68,7 @@ class UsuarioControlador
             session_start();
             $_SESSION['username_u']=$info->username;
             $_SESSION['nombre_u']=$info->name;
+            $_SESSION['rol']=$info->rol == 'true'? 'admin' : 'usuario';
             return true;
         }
         echo "No ha podido ser autenticado";

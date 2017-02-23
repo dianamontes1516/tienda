@@ -43,7 +43,7 @@
               </a>
           </li>
           <li>
-              <a href='/Tienda/usuario/agrega'>
+              <a href='/Tienda/usuario/agregar'>
                   Agregar productos a tu carrito
               </a>
           </li>
