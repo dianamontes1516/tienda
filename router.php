@@ -40,8 +40,7 @@ function routeRequest()
             $valores = explode('/',$uri);
             switch($valores[3]){
                 case 'inicio':
-                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/index.php');        
-                    
+                    require_once($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/index.php');                     
                     break;
                 case 'carrito':
                     echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/usuario/carrito.php');
@@ -66,8 +65,6 @@ function routeRequest()
                 case 'inicio':
                     echo file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vista/admin/index.php');        
                     break;
-                case 'altaAdmin':
-                    break;
                 case 'altaProducto':
                     break;
                 case 'editaProducto':
@@ -83,7 +80,7 @@ function routeRequest()
         echo "Hasta luego ".$_SESSION['username_u'];
 	session_unset();
 	session_destroy();
-        
+        header("Location:/Tienda");
     } elseif (preg_match("/Tienda\/controlador\/consultor\/[\s\S]+$/", $uri)){
         $valores = explode('/',$uri);        
         switch($valores[4]){
@@ -113,16 +110,15 @@ function routeRequest()
                 break;
         }
     } elseif (preg_match("/Tienda\/controlador\/usuario\/[\s\S]+$/", $uri)){
-        $valores = explode('/',$uri);        
+        $valores = explode('/',$uri);
         if(isset($_SESSION['username_u'])){
             switch($valores[4]){
                 case 'login':
                     break;
                 case 'agrega':
                     $u = new UsuarioControlador();
-                    print_r($_POST);
-                    print_r($_SESSION['username_u']);
                     $u->agregarACarrito($_SESSION['username_u'],$_POST['producto']);
+                    
                     break;
                 default:  
                     header("Location:/Tienda");

@@ -101,10 +101,11 @@ class UsuarioControlador
         }
         
         $usuario = $this->usuarioM->find($username,'username');
-        if(isset($info->username) === false){
+        print_r($usuario);
+        if($usuario->username === false){
             echo "Usuario no encontrado";
             return false;
         }
-        return $this->usuarioM->agregaACarrito($id_u,$id_p);
+        return $this->usuarioM->agregaACarrito($usuario->id,$id_p);
     }
 }
