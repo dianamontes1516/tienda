@@ -35,4 +35,12 @@ $items = $c->catalogo();
           <?php endforeach; ?>
       </table>
   </body>
+    <style>
+        table{
+          border: 2px solid rgba(122,139,172,1);
+          padding: 15px;
+          border-radius: 5px;
+          box-shadow: 1px 2px 10px rgba(1,1,1,0.5);
+        }
+    </style>
 </html>

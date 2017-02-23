@@ -17,7 +17,7 @@ $items = $c->catalogo();
     ?>
       <h2>Estos son los productos que te ofrece la tienda X:</h2>
       <table>
-          <tr>
+          <tr id="_encabezado">
               <th>Articulo</th>
               <th>Nombre</th>
               <th>Descripcion</th>
@@ -43,6 +43,16 @@ $items = $c->catalogo();
           <?php endforeach; ?>
       </table>
 
-      
+      <style>
+        table{
+          border: 2px solid rgba(122,139,172,1);
+          padding: 15px;
+          border-radius: 5px;
+          box-shadow: 1px 2px 10px rgba(1,1,1,0.5);
+        }
+        #_encabezado{
+          font-size: 16px;
+        }
+      </style>
   </body>
 </html>
