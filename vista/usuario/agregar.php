@@ -11,6 +11,9 @@ print_r($items);
    
   </head>
   <body>
+
+    
+
       <h2>Estos son los productos que te ofrece la tienda X:</h2>
       <table>
           <tr>

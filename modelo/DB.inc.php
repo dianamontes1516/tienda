@@ -18,7 +18,7 @@ class DB
         }
     }
 
-    public function getCon():PDO{
+    public function getCon(){
         return $this->con;  
     }
     
@@ -52,7 +52,7 @@ class DB
      * Función para realizar consultas en modo de transacción
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public function begin():bool{
+    public function begin(){
         return $this->con->beginTransaction();
     }
 

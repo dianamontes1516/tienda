@@ -13,7 +13,7 @@ function routeRequest()
     $uri = $_SERVER['REQUEST_URI'];
     
     if (preg_match("/^\/Tienda(\/index|\/)?$/", $uri)){
-        echo file_get_contents('./vista/index.php');
+        require_once('./vista/index.php');
 
     } elseif (preg_match('/^\/Tienda\/consultor\/[\s\S]+/', $uri)) {
         $valores = explode('/',$uri);
@@ -100,6 +100,7 @@ function routeRequest()
                     $u = new UsuarioControlador();                
                     
                     $resp = $u->alta($_POST);
+                    
                     if($resp){ //ejemplo simple, sólo un usuario logeado
                         $_SESSION['id_u']=$_POST['usern'];
                         $_SESSION['nombre_u']=$_POST['nombre'];

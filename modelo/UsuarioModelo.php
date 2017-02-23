@@ -33,7 +33,7 @@ class UsuarioModelo extends Modelo
                  ,'name' => $u['nombre']
                  ,'apaterno' => $u['apat']
                  ,'amaterno' => $u['amat']
-                 ,'email' => $u['correo']
+                 ,'email' => $u['mail']
                  ,'pass' => hash('sha256', $u['pass'])
                  ,'admin' => $u['rol']];
         $this->insert($datos);

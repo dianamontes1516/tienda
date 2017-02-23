@@ -11,8 +11,17 @@
    
   </head>
   <body>
-      <h2> Bienvenido al sitio de la Tienda X </h2>
-      A través de este sitio puedes:
+
+    <?php
+        //echo "1";
+        $ruta = $_SERVER['DOCUMENT_ROOT'];
+        //exit("fin");
+        require_once($ruta.'/vista/menu.php');
+    ?>
+
+      <!--<h2> Bienvenido al sitio de la Tienda X </h2>
+      A través de este sitio puedes:-->
+    <!--
       <ul>
           <li>
               <a href='/Tienda/consultor/catalogo'>
@@ -32,11 +41,11 @@
                   Consultar tu carrito de compras
               </a>
           </li>
-          <!-- <li>
+           <li>
                <a href='/Tienda/usuario/historial'>
                Consultar tu historial de compras
                </a>
-               </li> -->
+               </li> 
           <li>
               <a href='/Tienda/usuario/comprar'>
                   Comprar lo que hay en tu carrito
@@ -53,6 +62,6 @@
       ¿Ya tienes cuenta de usuario o administraror?
       <br>
       <a href='/Tienda/consultor/login'> Ingresa al sistema </a>
-
+    -->
   </body>
 </html>
